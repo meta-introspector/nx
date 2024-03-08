@@ -5,6 +5,7 @@ defmodule EXLA.MixProject do
   @version "0.7.1"
 
   def project do
+
     [
       app: :exla,
       version: @version,
@@ -44,12 +45,9 @@ defmodule EXLA.MixProject do
       mod: {EXLA.Application, []},
       env: [
         clients: [
-          cuda: [platform: :cuda],
-          rocm: [platform: :rocm],
           tpu: [platform: :tpu],
-          host: [platform: :host]
         ],
-        preferred_clients: [:cuda, :rocm, :tpu, :host]
+        preferred_clients: [ :tpu]
       ]
     ]
   end
@@ -62,7 +60,7 @@ defmodule EXLA.MixProject do
       {:nx, "~> 0.7.1"},
       # {:nx, path: "../nx"},
       {:telemetry, "~> 0.4.0 or ~> 1.0"},
-      {:xla, "~> 0.6.0", runtime: false},
+      {:xla, github: "meta-introspector/xla", branch: "force_tpu"},
       {:elixir_make, "~> 0.6", runtime: false},
       {:benchee, "~> 1.0", only: :dev},
       {:ex_doc, "~> 0.29", only: :docs},
